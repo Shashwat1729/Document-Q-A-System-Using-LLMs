@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Q&A System</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Document Q&A System Using LLMs</h1>
+        
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <label for="file">Upload a document (PDF, DOCX, TXT):</label>
+            <input type="file" name="file" id="file" required>
+            <button type="submit">Upload Document</button>
+        </form>
+        
+        {% if file_text %}
+        <form action="/ask" method="POST">
+            <label for="question">Ask a question based on the document:</label>
+            <input type="text" name="question" id="question" required>
+            <input type="hidden" name="document_text" value="{{ file_text }}">
+            <button type="submit">Ask Question</button>
+        </form>
+        {% endif %}
+        
+        {% if answer %}
+        <div class="response">
+            <h2>Answer: {{ answer }}</h2>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
